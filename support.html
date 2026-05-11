@@ -1,1 +1,534 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Contact Support</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary:        #2C53CC;
+      --primaryDark:    #1E3DA3;
+      --primaryLight:   #E8EDFB;
+      --primaryMuted:   #A8BDF0;
+      --accent:         #E67E22;
+      --background:     #F8FAFC;
+      --surface:        #FFFFFF;
+      --surfaceAlt:     #F1F5F9;
+      --border:         #E2E8F0;
+      --borderLight:    #F1F5F9;
+      --textPrimary:    #1E293B;
+      --textSecondary:  #64748B;
+      --textTertiary:   #94A3B8;
+      --urgent:         #E74C3C;
+      --positive:       #2ECC71;
+      --shadow:         rgba(44, 62, 80, 0.10);
+
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body:    'Inter', sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --primary:        #2C53CC;
+        --primaryDark:    #1E3DA3;
+        --primaryLight:   #1A2A4A;
+        --primaryMuted:   #2A3D6A;
+        --accent:         #E67E22;
+        --background:     #0F172A;
+        --surface:        #1E293B;
+        --surfaceAlt:     #263347;
+        --border:         #334155;
+        --borderLight:    #1E293B;
+        --textPrimary:    #F1F5F9;
+        --textSecondary:  #94A3B8;
+        --textTertiary:   #64748B;
+        --shadow:         rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--background);
+      color: var(--textPrimary);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ── */
+    .page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px 48px;
+    }
+
+    /* ── Header bar ── */
+    .header {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 0 24px;
+    }
+
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background: var(--primaryLight);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--primary);
+    }
+
+    .header-text h1 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--textPrimary);
+      line-height: 1.2;
+    }
+
+    .header-text p {
+      font-size: 13px;
+      color: var(--textSecondary);
+      margin-top: 2px;
+    }
+
+    /* ── Card ── */
+    .card {
+      width: 100%;
+      max-width: 560px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px var(--shadow);
+      padding: 28px 24px;
+    }
+
+    /* ── Field groups ── */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--textSecondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 7px;
+    }
+
+    label .required {
+      color: var(--primary);
+      margin-left: 2px;
+    }
+
+    label .optional {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      color: var(--textTertiary);
+      text-transform: none;
+      letter-spacing: 0;
+      margin-left: 6px;
+    }
+
+    select,
+    input[type="email"],
+    input[type="text"],
+    textarea {
+      width: 100%;
+      background: var(--surfaceAlt);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--textPrimary);
+      outline: none;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    select:focus,
+    input[type="email"]:focus,
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primaryLight);
+      background: var(--surface);
+    }
+
+    select.invalid,
+    input.invalid,
+    textarea.invalid {
+      border-color: var(--urgent);
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.10);
+    }
+
+    select option { color: var(--textPrimary); background: var(--surface); }
+    select option[value=""] { color: var(--textTertiary); }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 11px;
+      color: var(--textTertiary);
+      margin-top: 4px;
+    }
+
+    .char-count.near { color: var(--accent); }
+    .char-count.over { color: var(--urgent); }
+
+    /* ── Error message ── */
+    .field-error {
+      display: none;
+      font-size: 12px;
+      color: var(--urgent);
+      margin-top: 5px;
+    }
+
+    .field-error.visible { display: block; }
+
+    /* ── Divider ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--borderLight);
+      margin: 8px 0 24px;
+    }
+
+    /* ── Submit button ── */
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.18s, transform 0.12s, box-shadow 0.18s;
+      box-shadow: 0 4px 16px rgba(44, 83, 204, 0.25);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-submit:hover  { background: var(--primaryDark); box-shadow: 0 6px 20px rgba(44, 83, 204, 0.35); }
+    .btn-submit:active { transform: scale(0.98); }
+    .btn-submit:disabled { background: var(--primaryMuted); box-shadow: none; cursor: not-allowed; }
+
+    .btn-submit svg { width: 18px; height: 18px; stroke: #fff; }
+
+    /* ── Success state ── */
+    .success-card {
+      display: none;
+      width: 100%;
+      max-width: 560px;
+      background: var(--surface);
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 24px var(--shadow);
+      padding: 48px 24px;
+      text-align: center;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .success-card.visible { display: block; }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(46, 204, 113, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .success-icon svg { width: 32px; height: 32px; stroke: var(--positive); }
+
+    .success-card h2 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--textPrimary);
+      margin-bottom: 8px;
+    }
+
+    .success-card p {
+      font-size: 14px;
+      color: var(--textSecondary);
+      max-width: 320px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .spinner.visible { display: block; }
+
+    @keyframes spin    { to { transform: rotate(360deg); } }
+    @keyframes fadeUp  { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── Footer note ── */
+    .footer-note {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      color: var(--textTertiary);
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Contact Support</h1>
+      <p>We'll get back to you as soon as possible.</p>
+    </div>
+  </div>
+
+  <!-- Form card -->
+  <div class="card" id="formCard">
+    <form id="contactForm" novalidate>
+
+      <!-- Topic -->
+      <div class="field" id="field-topic">
+        <label for="topic">Topic <span class="required">*</span></label>
+        <select id="topic" name="topic">
+          <option value="">Select a topic…</option>
+          <option value="Bug Report">🐛 Bug Report</option>
+          <option value="Feature Request">💡 Feature Request</option>
+          <option value="Account & Billing">💳 Account &amp; Billing</option>
+          <option value="Performance Issue">⚡ Performance Issue</option>
+          <option value="Data & Privacy">🔒 Data &amp; Privacy</option>
+          <option value="General Question">❓ General Question</option>
+          <option value="Other">📌 Other</option>
+        </select>
+        <span class="field-error" id="err-topic">Please select a topic.</span>
+      </div>
+
+      <!-- Email -->
+      <div class="field" id="field-email">
+        <label for="email">Email <span class="required">*</span></label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
+        <span class="field-error" id="err-email">Please enter a valid email address.</span>
+      </div>
+
+      <!-- Title (optional) -->
+      <div class="field" id="field-title">
+        <label for="title">Title <span class="optional">optional</span></label>
+        <input type="text" id="title" name="title" placeholder="Short summary of your issue" maxlength="120" />
+      </div>
+
+      <hr class="divider" />
+
+      <!-- Description -->
+      <div class="field" id="field-description">
+        <label for="description">Description <span class="required">*</span></label>
+        <textarea id="description" name="description" placeholder="Describe your issue or question in detail…" maxlength="2000"></textarea>
+        <div class="char-count" id="charCount">0 / 2000</div>
+        <span class="field-error" id="err-description">Please describe your issue (at least 20 characters).</span>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" id="btnIcon">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+        <div class="spinner" id="spinner"></div>
+        <span id="btnLabel">Send Message</span>
+      </button>
+
+    </form>
+  </div>
+
+  <!-- Success card -->
+  <div class="success-card" id="successCard">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+    <h2>Message Sent!</h2>
+    <p>Thanks for reaching out. Our team will review your message and reply to your email shortly.</p>
+  </div>
+
+  <p class="footer-note">Your message will be sent to our support team.<br>We typically respond within 24–48 hours.</p>
+
+</div>
+
+<script>
+  const FORM_ENDPOINT = "https://formsubmit.co/marino.alessio9599@gmail.com";
+
+  const form        = document.getElementById('contactForm');
+  const submitBtn   = document.getElementById('submitBtn');
+  const spinner     = document.getElementById('spinner');
+  const btnIcon     = document.getElementById('btnIcon');
+  const btnLabel    = document.getElementById('btnLabel');
+  const formCard    = document.getElementById('formCard');
+  const successCard = document.getElementById('successCard');
+  const descTA      = document.getElementById('description');
+  const charCount   = document.getElementById('charCount');
+
+  /* ── Char counter ── */
+  descTA.addEventListener('input', () => {
+    const len = descTA.value.length;
+    const max = 2000;
+    charCount.textContent = `${len} / ${max}`;
+    charCount.className = 'char-count' + (len > max * 0.95 ? ' over' : len > max * 0.80 ? ' near' : '');
+  });
+
+  /* ── Validation helpers ── */
+  function setValid(fieldId, errId) {
+    document.getElementById(fieldId).querySelector('select,input,textarea')?.classList.remove('invalid');
+    document.getElementById(errId).classList.remove('visible');
+  }
+
+  function setInvalid(fieldId, errId) {
+    const el = document.getElementById(fieldId).querySelector('select,input,textarea');
+    el?.classList.add('invalid');
+    document.getElementById(errId).classList.add('visible');
+    return el;
+  }
+
+  function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+  function validate() {
+    let first = null;
+
+    // Topic
+    if (!document.getElementById('topic').value) {
+      first = first || setInvalid('field-topic', 'err-topic');
+    } else { setValid('field-topic', 'err-topic'); }
+
+    // Email
+    if (!validateEmail(document.getElementById('email').value)) {
+      first = first || setInvalid('field-email', 'err-email');
+    } else { setValid('field-email', 'err-email'); }
+
+    // Description (min 20 chars)
+    if (descTA.value.trim().length < 20) {
+      first = first || setInvalid('field-description', 'err-description');
+    } else { setValid('field-description', 'err-description'); }
+
+    if (first) { first.focus(); return false; }
+    return true;
+  }
+
+  /* ── Submit ── */
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    // Loading state
+    submitBtn.disabled = true;
+    btnIcon.style.display = 'none';
+    spinner.classList.add('visible');
+    btnLabel.textContent = 'Sending…';
+
+    const payload = new FormData();
+    payload.append('_subject', `[Support] ${document.getElementById('topic').value}${document.getElementById('title').value ? ' — ' + document.getElementById('title').value : ''}`);
+    payload.append('_template', 'table');
+    payload.append('_captcha', 'false');
+    payload.append('Topic',       document.getElementById('topic').value);
+    payload.append('Email',       document.getElementById('email').value.trim());
+    payload.append('Title',       document.getElementById('title').value.trim() || '(not provided)');
+    payload.append('Description', descTA.value.trim());
+
+    try {
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: payload });
+      if (res.ok) {
+        formCard.style.animation = 'fadeUp 0.3s ease reverse both';
+        setTimeout(() => {
+          formCard.style.display = 'none';
+          successCard.classList.add('visible');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 280);
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      submitBtn.disabled = false;
+      btnIcon.style.display = '';
+      spinner.classList.remove('visible');
+      btnLabel.textContent = 'Send Message';
+      alert('Something went wrong. Please try again or email us directly at marino.alessio9599@gmail.com');
+    }
+  });
+
+  /* ── Live validation on blur ── */
+  document.getElementById('topic').addEventListener('change', () => {
+    if (document.getElementById('topic').value) setValid('field-topic', 'err-topic');
+  });
+  document.getElementById('email').addEventListener('blur', () => {
+    if (validateEmail(document.getElementById('email').value)) setValid('field-email', 'err-email');
+  });
+  descTA.addEventListener('blur', () => {
+    if (descTA.value.trim().length >= 20) setValid('field-description', 'err-description');
+  });
+</script>
+</body>
+</html>
